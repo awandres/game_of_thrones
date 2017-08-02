@@ -3,3 +3,8 @@
 <div class="house_img"><img src="<%= @character.img_url %>" alt=""></div>
 
 <h3><%= @character.name %> belongs to House <%= @character.house.name %> and uses <%= @character.weapon %> as their primary weapon </h3>
+
+<footer>
+  <p><%= link_to 'Destroy', house_character_path(@character), method: :delete, data: {confirm: 'Are you sure?'} %><p>
+  <p><%= link_to 'Update', edit_house_character_path(@character)%> </p>
+</footer>

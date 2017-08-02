@@ -7,6 +7,19 @@ class HousesController < ApplicationController
   def show
     @house = House.find(params[:id])
   end
-  
 
+  def new
+    @house = House.new
+  end
+
+  def create
+    @house = House.create(house_params)
+    redirect_to @house
+  end
+
+private
+
+def house_params
+  params.require(:house).permit(:name, :animal, :img_url)
+end
 end
