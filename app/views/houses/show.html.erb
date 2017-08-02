@@ -1,0 +1,13 @@
+<div class="house_img"><img src="<%= @house.img_url %>" alt=""></div>
+<h1>House <%= @house.name %> of the <%= @house.animal %></h1>
+
+<h3 class = 'title'>Members</h3>
+<div class="char_list">
+
+  <% @house.characters.each do |character| %>
+
+  <a href="<%= house_character_path(@house, character) %>"><%= character.name %></a>
+
+  <% end %>
+
+</div>

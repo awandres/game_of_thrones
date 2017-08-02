@@ -1,0 +1,11 @@
+<h1>Houses of Westeros</h1>
+
+<div class="container">
+
+<% @houses.each do |house| %>
+<div class="house">
+  <h3><%= house.name %></h3>
+  <a href='<%= house_path(house) %>'>  <img src="<%= house.img_url %>" alt=""></a>
+</div>
+<% end %>
+</div>
