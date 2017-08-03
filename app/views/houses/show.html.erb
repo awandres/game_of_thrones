@@ -11,4 +11,9 @@
   <% end %>
   </div>
 <hr>
-<footer style="text-align:center; margin-top:30px"><%= link_to 'Add a Member', new_house_character_path(@house) %> <footer>
+<footer style="text-align:center; margin-top:30px">
+
+  <%= link_to 'Add a Member', new_house_character_path(@house) %>
+  <%= link_to 'Destroy House', house_path(@house), method: :delete, data: {confirm: "Are you sure?"} %>
+
+ <footer>

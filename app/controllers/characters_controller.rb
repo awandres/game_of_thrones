@@ -1,5 +1,8 @@
 class CharactersController < ApplicationController
 
+before_action :authenticate_user!, :except => [:show]
+
+
   def show
     @character = Character.find(params[:id])
   end
@@ -11,14 +14,19 @@ class CharactersController < ApplicationController
 
   def create
     @house = House.find(params[:house_id])
-    @character = @house.characters.create(character_params)
+    @character = @house.characters.create!(character_params.merge(user: current_user))
     redirect_to house_path(@house)
   end
 
   def destroy
     @character = Character.find(params[:id])
-    @character.destroy
-    redirect_to @character.house
+    if @character.user == current_user
+      @character.destroy
+      redirect_to @character.house
+    else
+      redirect_to @character.house
+      flash[:alert] = "Only the user who created this character can destroy"
+    end
   end
 
   def edit
@@ -28,8 +36,13 @@ class CharactersController < ApplicationController
 
   def update
     @character = Character.find(params[:id])
-    @character.update(character_params)
-    redirect_to house_character_path(@character)
+    if @character.user == current_user
+      @character.update(character_params)
+      redirect_to house_character_path(@character)
+    else
+      redirect_to house_character_path(@character)
+      flash[:alert] = "Only the user who created this character can edit"
+    end
   end
 
 private
